@@ -10,7 +10,7 @@ A frontend application that displays a list of cryptocurrencies and their realti
 2. [Features](#features)
 3. [Installation](#installation)
 4. [Running the App](#running-the-app)
-5. [Additional Notes](#additional-notes)
+5. [Notes](#notes)
 
 ## Introduction
 
@@ -59,7 +59,7 @@ This project is a web application that utilizes React and typescript on the fron
 
    This will run the React app on `http://localhost:5173`.
 
-## Additional Notes
+## Notes
 
 - **Design Layout** - I saw how the original website was handling the rendering of data and found it convienient and proggresive to implement it for this app.
 
