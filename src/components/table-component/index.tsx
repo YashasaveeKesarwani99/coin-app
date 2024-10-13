@@ -149,7 +149,11 @@ const TableComponent: React.FC<TableComponentProps> = ({
   }, []);
 
   if (isLoading) {
-    return <Skeleton active paragraph={{ rows: 20 }} className="p-10 h-full" />;
+    return (
+      <div data-testid="skeleton">
+        <Skeleton active paragraph={{ rows: 20 }} className="p-10 h-full" />
+      </div>
+    );
   }
   return (
     <Table
