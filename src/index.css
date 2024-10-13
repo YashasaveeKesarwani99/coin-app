@@ -5,3 +5,64 @@
 body {
   @apply p-0 m-0 box-border;
 }
+
+th {
+  @apply !bg-black !text-table-head;
+}
+
+.ant-table-thead > tr > th {
+  @apply hover:!text-white hover:!cursor-pointer;
+}
+
+td {
+  @apply !bg-primary !text-white;
+}
+
+.ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  @apply hidden;
+}
+
+tbody .ant-table-row {
+  @apply bg-layout-secondary hover:!bg-black;
+}
+
+th,
+td {
+  @apply !border-b-black !bottom-[0.5px];
+}
+
+.anticon-right,
+.anticon-left,
+.ant-table-column-sorter svg {
+  @apply text-white;
+}
+
+.ant-pagination-options {
+  @apply !hidden;
+}
+
+.ant-table-placeholder {
+  @apply !h-[80vh];
+}
+
+@media (max-width: 760px) {
+  .ant-table-wrapper
+    .ant-table-container
+    table
+    > thead
+    > tr:first-child
+    > *:last-child,
+  .ant-table-wrapper
+    .ant-table-container
+    table
+    > thead
+    > tr:first-child
+    > *:first-child {
+    @apply rounded-none;
+  }
+}

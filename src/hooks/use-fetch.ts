@@ -2,9 +2,15 @@
 
 import { useQuery } from "react-query";
 
-export const useFetch = <T>(url: string, pageNumber: number) => {
+export const useFetch = <T>(url: string, pageNumber?: number) => {
   const fetchData = async (): Promise<T> => {
-    const response = await fetch(`${url}&offset=${pageNumber}`);
+    let computeUrl: string;
+    if (pageNumber) {
+      computeUrl = `${url}&offset=${pageNumber}`;
+    } else {
+      computeUrl = url;
+    }
+    const response = await fetch(computeUrl);
 
     if (!response.ok) {
       throw new Error("Unable to fetch crypto info!");

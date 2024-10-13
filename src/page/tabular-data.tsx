@@ -9,8 +9,11 @@ import { useEffect, useRef, useState } from "react";
 import { getCommaSeparatedIds } from "../utils/get-comma-separated-ids";
 import { url, webSocketUrl } from "../config";
 import { handleWebSocketMessage } from "../utils/handle-web-socket-message";
+import TableComponent from "../components/table-component";
+import { useNotify } from "../hooks/use-notify";
 
 const TabularData = () => {
+  const notify = useNotify();
   const [ids, setIds] = useState(""); // updating ids of coins
   const queryClient = useQueryClient(); // for manipulating data
   const wsRef = useRef<WebSocket | null>(null); // ref for storing context of the current web socket
@@ -19,6 +22,12 @@ const TabularData = () => {
     url,
     pageNumber
   ); // custom hook to fetch and cache data using react-query
+
+  // handling data error
+  if (error) {
+    notify.error("Unable to load the data!");
+    return;
+  }
 
   // creating coin list ids as soon as we fetch data
   useEffect(() => {
@@ -52,7 +61,18 @@ const TabularData = () => {
     };
   }, [ids]);
 
-  return <></>;
+  useEffect(() => {
+    setIds("");
+  }, [pageNumber]);
+
+  return (
+    <TableComponent
+      pageNumber={pageNumber}
+      setPageNumber={setPageNumber}
+      data={data}
+      isLoading={isLoading}
+    />
+  );
 };
 
 export default TabularData;

@@ -12,6 +12,7 @@ declare global {
     symbol: string;
     volumeUsd24Hr: string;
     vwap24Hr: string;
+    isFavourite?: boolean;
   }
 
   interface TableDataResponse {
@@ -21,6 +22,23 @@ declare global {
 
   interface UpdatedResponse {
     [key: string]: string;
+  }
+
+  interface DetailsResponse {
+    data: TableData;
+    timestamp: number;
+  }
+
+  interface GraphData {
+    priceUsd: string;
+    time: number;
+    circulatingSupply: string;
+    date: string;
+  }
+
+  interface GraphDataResponse {
+    data: GraphData[];
+    timestamp: number;
   }
 }
 
