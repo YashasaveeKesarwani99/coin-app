@@ -1,13 +1,15 @@
 // rendering pages in a defined "parent" routes
 import { useRoutes } from "react-router-dom";
+import AppLayout from "../layout";
+import TabularData from "../page/tabular-data";
 
 const AppRoutes = () => {
   const routes = [
     {
       path: "/", // the parent route
-      element: <></>, // layout
+      element: <AppLayout />, // layout
       children: [
-        { path: "/", element: <></> }, // table page
+        { index: true, element: <TabularData /> }, // table page
         { path: "/:id", element: <></> }, // detail's page
       ],
     },
