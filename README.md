@@ -14,48 +14,41 @@ A frontend application that displays a list of cryptocurrencies and their realti
 
 ## Introduction
 
-This project is a web application that utilizes React on the frontend and Express on the backend. It serves as a robust example of how to integrate these two technologies to create a seamless full-stack experience.
+This project is a web application that utilizes React and typescript on the frontend.
 
 ## Features
 
 - React for dynamic, interactive UI
-- Express for a RESTful backend API
 - TypeScript support for type safety
 - Tailwind CSS for styling
-- Material UI as component library
+- Antd as component library
 - React Query for fetching and caching data and error handling
+- Recoil for global state management
+- Notistack for notifying users of side effects
+- Web Sockets for subscribing to real time data updates
 
 ## Installation
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/YashasaveeKesarwani99/streamify.git
-   cd streamify
+   git clone https://github.com/YashasaveeKesarwani99/coin-app.git
+   cd coin-app
    ```
 
-2. **Install dependencies for the frontend:**
+2. **Install dependencies:**
 
    ```bash
-   cd streamify-web
-   npm install
-   ```
-
-3. **Install dependencies for the backend:**
-
-   ```bash
-   cd streamify-server
+   cd coin-app
    npm install
    ```
 
 ## Usage
 
-### Frontend
-
-1. **Navigate to the `client` directory:**
+1. **Navigate to the `root` directory:**
 
    ```bash
-   cd streamify-web
+   cd coin-app
    ```
 
 2. **Start the React development server:**
@@ -66,50 +59,34 @@ This project is a web application that utilizes React on the frontend and Expres
 
    This will run the React app on `http://localhost:5173`.
 
-### Backend
-
-1. **Navigate to the `server` directory:**
-
-   ```bash
-   cd streamify-web
-   ```
-
-2. **Start the Express server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   This will run the Express server on `http://localhost:3000`.
-
 ## Additional Notes
 
-- A dashboard contains information, sometimes a lot of it. The user persona is such that it wants to see relevant data and it's visualization and leave other things that are distraction. `Usability` and `clarity` of the interface along with optimization of rendering it ( especially when data sensitive calls are being made to a server ) have been given the utmost importance while developing the application.
+- **Design Layout** - I saw how the original website was handling the rendering of data and found it convienient and proggresive to implement it for this app.
 
-- **Design Layout** - The layout has been designed keeping in mind the psychology of the user. Important metrics like `total revenue` and `most streamed artist` have been given the hero section. Next comes the data visualization part. In the end I've kept the tabular data as it requires more than a quick view.
+- **The implementation** - I've used react and typescript to form the basis of the project. Vite as the modular bundler.
 
-- **The implementation** - I've used react and typescript to form the basis of the frontend. Vite as the modular bundler. I've tried to give an MVC structure to the codebase ( not in the fullest sense, tho ).
+- The data fetching, error throwing, caching and loading/pending status has been taken care by `react query`. The custom hook that I've made to fetch data acts as controller. the model/schema of response have been exported to `global.d.ts`. The view structure has been implemented through modular and clean code practices. I have divided the codebase into pages, the subsequent components.
 
-- The data fetching, error throwing, caching and loading/pending status has been taken care by `react query`. The custom hook that I've made to fetch data acts as controller. the model/schema of response have been exported to `global.d.ts`. The view structure has been implemented through modular and clean code practices. I have divided the codebase into pages, the subsequent components and some atoms that are nothing but smallest reusable components.
+- The data fetching is done with a `custom hook` which caching and an appropriate stale time to make efficient calls to our server. I have also created two other custom hooks for showing snackbar ( error handling in frontend ) and for manipulating the local storage data.
 
-- The data fetching is done with a `custom hook` which caching and an appropriate stale time to make efficient calls to our server. I have also created two other custom hooks for fetching current screen width ( helped in making the app responsive ) and for showing snackbar ( error handling in frontend ).
-
-- I have used `materialUI` as it has lot of options, good documentation and also the bundle size is lesser than antd ( saying by a first hand experience and the community supports this opinion ).
+- I have used `antd` as it has lot of options, good documentation and also the bundle size is industry standards giving a good score to this application in `lighthouse`
 
 - I have used `tailwindCSS` as the css library. My goto library as it has the best documentation, suggestive classes and again - lot of options.
 
-- I haven't implemented a global state as the communications between the components were next to nothing. Although I had installed `recoil` initially but removed it from the package after seeing it's futility.
+- I have implemented global state management through `Recoil` and haven't used `Redux` because there was only one state (page number) that had to be managed globally and redux implementing redux for this would have been a task itself.
 
-- I was going to implement unit testing with `vitest` and `react-testing-library` but unable to do it because of time constraint. I'll add that later.
-
-- There was a minimal backend/server code to give our frontend a reality check by making calls to a real server. There also I've implemented an MVC structure.
+- I have implemented unit testing with `vitest` and `react-testing-library`. Vitest is similar to jest, it performs well with vite which is the reason I prefer vitest when using vite.
 
 - There would be many drawbacks in the application as it needs a thorough testing but I'm happy to say that it works right now. it's responsive too. I'm open to feedbacks!
 
-## Logs
+## Additional Notes
 
-- Added lazy loading to few components that were not visible on the folder, this divded the js chunks hence improved the FCP. Also adding it to the components that were not on the top did not affect the CLS score.
+- The first thing that I would change in this project is the layout, I think it was not deeply though of. A more flexible layout would be better instead of contraining contents with `absolute` positioning.
 
-- Added intersectiong observer to the elements that does not come in the folder of the page, this reduced the LCP.
+- The application has good web vitals, the FCP is within good limit. Same is with CLS score. Although `preconnect` -ing of the origin `https://api.coincap.io` would have reduced FCP and LCP.
 
-- Added service workers. The vite service worker configuration is a little touchy. User can make fetch requests even when they are offline.
+- Next, I think using `react-helmet` will increase the SEO score of the application by adding meta descripition for all the pages.
+
+- There was also an intent to add `lazy loading` but the app comes into the folder and so there would have been no significant decrease in the initial load time.
+
+- A good addition to this app can be implementing `service worker` to the app so that it can be played with when offline and there would be less api hits on the whole to fetch data.
